@@ -263,6 +263,11 @@ namespace Converter
             }
         }
 
+        bool UseMDFFile
+        {
+            get { return cboDatabases.SelectedIndex == 0; }
+        }
+
         private void btnSqlServerSQLite_Click(object sender, EventArgs e)
         {
             string tempFilePath = string.Empty;
@@ -294,7 +299,7 @@ namespace Converter
                 }
             }
 
-            if (txtSqlServerPath.Text != string.Empty) {
+            if (UseMDFFile) {
                 SqlServerPath = Path.GetFullPath(txtSqlServerPath.Text);
                 if (! File.Exists(SqlServerPath)) {
                     MessageBox.Show("Input file " + SqlServerPath + " not found.", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

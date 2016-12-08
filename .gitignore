@@ -3,3 +3,7 @@
 ################################################################################
 
 /Converter/bin/x86/Debug
+/Converter/obj/x86/Debug
+/DbAccess/bin/x86/Debug
+/DbAccess/obj/x86/Debug
+/.vs/SqlConverter/v14
