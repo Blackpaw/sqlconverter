@@ -53,7 +53,7 @@ namespace Converter
 
         private void txtSqlServerPath_TextChanged(object sender, EventArgs e)
         {
-            if (txtSqlServerPath.Text != string.Empty && txtSQLitePath.Text == string.Empty)
+            if (UseMDFFile && txtSQLitePath.Text == string.Empty)
                 try
                 {
                     txtSQLitePath.Text = Path.ChangeExtension(txtSqlServerPath.Text, ".db");
@@ -132,7 +132,7 @@ namespace Converter
 
         private void txtSQLitePath_TextChanged(object sender, EventArgs e)
         {
-            if (txtSQLitePath.Text != string.Empty && txtSqlServerPath.Text == string.Empty)
+            if (txtSQLitePath.Text != string.Empty && ! UseMDFFile)
                 try
                 {
                     txtSqlServerPath.Text = Path.ChangeExtension(txtSQLitePath.Text, ".mdf");
@@ -247,7 +247,7 @@ namespace Converter
 
         private void dropSqlConverterDatabase()
         {
-            if (txtSqlServerPath.Text != string.Empty) {
+            if (UseMDFFile) {
                 string constr;
                 if (cbxIntegrated.Checked) {
                     constr = GetSqlServerConnectionString(txtSqlAddress.Text, "master");
@@ -345,7 +345,7 @@ namespace Converter
 
                         if (done)
                         {
-                            if (txtSqlServerPath.Text != string.Empty) {
+                            if (UseMDFFile) {
                                 dropSqlConverterDatabase();
                                 Directory.Delete(tempDirPath, true);
                             }
@@ -447,7 +447,7 @@ namespace Converter
                 return;
             }
 
-            if (txtSqlServerPath.Text != string.Empty)
+            if (UseMDFFile)
             {
                 tempFilePath = Path.GetFullPath(tempDirPath + @"\" + Path.GetFileName(txtSqlServerPath.Text));
 
@@ -510,7 +510,7 @@ namespace Converter
 
                     if (done)
                     {
-                        if (txtSqlServerPath.Text != string.Empty) {
+                        if (UseMDFFile) {
                             dropSqlConverterDatabase();
                             if (success) {
                                 System.IO.File.Copy(tempFilePath, SqlServerPath, true);
